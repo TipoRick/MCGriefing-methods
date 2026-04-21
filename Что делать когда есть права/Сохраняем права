@@ -1,0 +1,32 @@
+Методы сохранения прав на случай снятия
+
+LuckPerms
+закладываем бомбу в правах пример /lp group default permission set luckperms.user.permission.set true
+
+Citizens + CommandNPC
+если есть citizens делаем нпс пример
+/npc create 8andy
+/npc cmd add lp group default permission set * true
+
+EasyPayments
+Меняем магазин через плагин
+Вводим данные со своего магазина из конфига
+Ключ лежит в config.yml, а айди можно узнать через панель
+/ep setup access-key *ключ*
+/ep setup server-id *айди сервера*
+дальше заходим на наш easydonate и ставим тестовый режим и добавляем товар с командой которую нужно исполнить
+
+PermissionsEx
+/pex group default add permissionsex.group.add
+
+или же подселяем свою базу данных к серверу
+
+/pex config permissions.backend sql
+/pex config permissions.backends.sql.uri *заполняем свой URL*
+/pex config permissions.backends.sql.user *заполняем своего юзера*
+/pex config permissions.backends.sql.password *пароль от своей бд*
+
+DecentHolograms
+отличный метод сохранения прав
+показал эффективность на помойке фреймдева
+Добавляем действие в голограмму, к примеру консольную команду при клике

