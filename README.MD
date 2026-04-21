@@ -4,11 +4,11 @@
 **Внимание**, не покупайте методы от третьих лиц, большинство инфоцыган продает бесплатные методы, которые лежат/лежали в открытом доступе, зачастую такие "продавцы" сами не разбираются как эти методы работают. В интернете за товар нет никаких гарантий  
   
 В состав методов входят  
-[ForceOP](https://github.com/rick-asw/mcgriefingmethods/tree/main/ForceOP)  
-[Методы краша](https://github.com/rick-asw/mcgriefingmethods/tree/main/%D0%9A%D1%80%D0%B0%D1%88%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0)  
-[Обходы](https://github.com/rick-asw/mcgriefingmethods/tree/main/%D0%9E%D0%B1%D1%85%D0%BE%D0%B4%D1%8B%20%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D1%8B)  
-[Прочее](https://github.com/rick-asw/mcgriefingmethods/tree/main/%D0%9F%D1%80%D0%BE%D1%87%D0%B5%D0%B5)  
-[Дамп файлов](https://github.com/rick-asw/mcgriefingmethods/tree/main/%D0%A7%D1%82%D0%BE%20%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C%20%D0%BA%D0%BE%D0%B3%D0%B4%D0%B0%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BF%D1%80%D0%B0%D0%B2%D0%B0)  
+[ForceOP](https://github.com/TipoRick/MCGriefing-methods/tree/main/ForceOP)  
+[Методы краша](https://github.com/TipoRick/MCGriefing-methods/tree/main/Краш%20сервера)  
+[Обходы](https://github.com/TipoRick/MCGriefing-methods/tree/main/Обходы%20защиты)  
+[Прочее](https://github.com/TipoRick/MCGriefing-methods/tree/main/Прочее)  
+[Дамп файлов](https://github.com/TipoRick/MCGriefing-methods/tree/main/Что%20делать%20когда%20есть%20права)  
   
 **Связаться со мной** - Discord @autosaveworld  
   
